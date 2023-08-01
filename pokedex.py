@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+from data import *
 from PIL import Image, ImageTk
+
 
 fenetre = Tk()
 fenetre.title("Pokedex")
@@ -10,6 +12,50 @@ fenetre.resizable(False, False)
 fenetre.config(bg='red')
 
 ttk.Separator(fenetre, orient=VERTICAL).grid(row=0, columnspan=1, ipadx=272)
+
+# Fonctions
+def ajouter_pokemon(i):
+    listbox.config(END, saisie_pok_name.get())
+
+def choose_pokemon (i):
+    left_frame['bg'] = pokemon[i]['autres'][1]
+
+    poke_name['text'] = i
+    poke_name['bg'] = pokemon[i]['autres'][1]
+    poke_type['text'] = pokemon[i]['type'][1]
+    poke_type['bg'] = 'grey'
+    poke_number['text'] = pokemon[i]['type'][0]
+    poke_number['bg'] = pokemon[i]['autres'][1]
+
+    image = pokemon[i]['Others'][0]
+
+    pok_image = Image.open("img/bg_pokemon.jpg")
+    pok_image = pok_image.resize((300, 200))
+    pok_image = ImageTk.PhotoImage(pok_image)
+
+    img_base = Label(left_frame, image=pok_image, bg=pokemon[i]['Others'][1])
+    img_base.place(x=70, y=70)
+
+    # if i == 'Bulbizarre':
+    #     pok_name['fg'] = 'green'
+    # else:
+    #     pok_name['fg'] = 'blue'
+
+    # # loading status
+    # poke_hp['text'] = pokemon[i]['status'][0]
+    # poke_attack['text'] = pokemon[i]['status'][1]
+    # poke_defense['text'] = pokemon[i]['status'][2]
+    # poke_vit['text'] = pokemon[i]['status'][3]
+    # poke_total['text'] = pokemon[i]['status'][4]
+
+    # # loading skills
+    # poke_comp1['text'] = pokemon[i]['attaques'][0]
+    # poke_comp2['text'] = pokemon[i]['attaques'][1]
+
+    # poke_type.lift()
+    # poke_number.lift()
+    
+
 
 # Déclaration de la taille de ma fenêtre de gauche avec les infos affichés
 left_frame = Frame(fenetre, width=450, height=650, bg='white')
@@ -43,19 +89,48 @@ poke_vit = Label(left_frame, text='45', font=("Arial 16"), bg='white', fg='black
 poke_total = Label(left_frame, text='237', font=("Arial 16"), bg='white', fg='black').place(x=190, y=600)
 
 
-# Déclaration de mes images
-pok_image = Image.open("img/bg_pokemon.jpg")
-pok_image = pok_image.resize((300, 200))
-pok_image = ImageTk.PhotoImage(pok_image)
-
-img_base = Label(left_frame, image=pok_image)
-img_base.place(x=70, y=70)
-
-
 # Déclaration de ma Listbox sur rigth_frame
-pok_list = Label(rigth_frame, width=20, height=34, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=10, y=10)
+listbox = Listbox(rigth_frame, width=20, height=30, font=("Arial", 12), bg='white', relief=SUNKEN)
 
+# Ajout d'éléments à ma listbox
+listbox.insert(END, "Bulbizarre")
+listbox.insert(END, "Herbizarre")
+listbox.insert(END, "Florizarre")
+
+listbox.place(x=10, y=10)
+
+# Label pour ajouter un pokemon à la liste
+l_add_pok_name = Label(rigth_frame, text="Ajouter un pokemon\nAjouter son nom", font=("Arial", 12), bg='white').place(x=220, y=20)
+
+saisie_pok_name = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=80)
+
+l_add_pok_number = Label(rigth_frame, text="Son numéro", font=("Arial", 12), bg='white').place(x=220, y=110)
+saisie_pok_number = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=140)
+
+l_add_pok_type = Label(rigth_frame, text="Son type", font=("Arial", 12), bg='white').place(x=220, y=170)
+saisie_pok_type = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=200)
+
+l_add_pok_comp = Label(rigth_frame, text="Deux attaques", font=("Arial", 12), bg='white').place(x=220, y=230)
+saisie_pok_comp1 = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=260)
+saisie_pok_comp2 = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=290)
+
+
+l_add_pok_hp = Label(rigth_frame, text="HP", font=("Arial", 12), bg='white').place(x=220, y=320)
+saisie_pok_hp = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=350)
+
+l_add_pok_attaque = Label(rigth_frame, text="Attaque", font=("Arial", 12), bg='white').place(x=220, y=380)
+saisie_pok_attaque = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=410)
+
+l_add_pok_defense = Label(rigth_frame, text="Défense", font=("Arial", 12), bg='white').place(x=220, y=440)
+saisie_pok_defense = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=470)
+
+l_add_pok_vitesse = Label(rigth_frame, text="Vitesse", font=("Arial", 12), bg='white').place(x=220, y=500)
+saisie_pok_vitesse = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=530)
+
+l_add_pok_total = Label(rigth_frame, text="Total", font=("Arial", 12), bg='white').place(x=220, y=560)
+saisie_pok_total = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=210, y=590)
 
 # Création d'un bouton pour ajouter un pokemon à la liste
+btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_pokemon, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=30, y=600)
 
 fenetre.mainloop()
