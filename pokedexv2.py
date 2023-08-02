@@ -115,6 +115,17 @@ def ajouter_pokemon():
                                 ))
     add_pokename = listbox.insert(END, saisie_pok_name.get())
 
+    saisie_pok_name.delete(0, END), 
+    saisie_pok_type.delete(0, END), 
+    saisie_pok_number.delete(0, END), 
+    saisie_pok_hp.delete(0, END), 
+    saisie_pok_attack.delete(0, END), 
+    saisie_pok_defense.delete(0, END), 
+    saisie_pok_vit.delete(0, END), 
+    saisie_pok_comp1.delete(0, END), 
+    saisie_pok_comp2.delete(0, END),
+    saisie_pok_img.delete(0, END)
+
 # Choisir le pokemon à afficher
 def choose_pokemon():
     index = listbox.curselection()[0]
@@ -128,15 +139,24 @@ def choose_pokemon():
     poke_defense.config(text=listPokemons[index].defense)
     poke_vit.config(text=listPokemons[index].vit)
     poke_total.config(text=listPokemons[index].total)
-
-    # poke_img.delete(image)
-
+    
     image = Image.open(listPokemons[index].image)
     image = image.resize((210, 210))
     poke_img = ImageTk.PhotoImage(image)
 
-    l_img = Label(left_frame, image=poke_img)
+    l_img.config(image=poke_img)
     l_img.place(x=10, y=70)
+
+    if poke_type(text=listPokemons[index].type) == "Plante / Poison":
+        left_frame.config(bg='#28fc03')
+    elif poke_type(text=listPokemons[index].type) == "Insecte":
+        left_frame.config(bg='#baf779')
+    elif poke_type(text=listPokemons[index].type) == "Eau":
+        left_frame.config(bg='#8cc5f5')
+    elif poke_type(text=listPokemons[index].type) == "Feu":
+        left_frame.config(bg='#ed151d')
+    else:
+        left_frame(bg='#ebdeab')
 
 
 
@@ -200,7 +220,7 @@ btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_po
 btn_add_poke.place(x=210, y=610)
 
 # Création d'un bouton pour sélectionner un pokemon dans la liste
-bts_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-bts_select_pok.place(x=10, y=560)
+btn_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
+btn_select_pok.place(x=10, y=560)
 
 fenetre.mainloop()
