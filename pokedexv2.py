@@ -50,7 +50,7 @@ poke_defense = Label(left_frame, text='49', font=("Arial 16"), bg='white', fg='b
 poke_defense.place(x=190, y=510)
 poke_vit = Label(left_frame, text='45', font=("Arial 16"), bg='white', fg='black')
 poke_vit.place(x=190, y=540) 
-poke_total = Label(left_frame, text='237', font=("Arial 16"), bg='white', fg='black')
+poke_total = Label(left_frame, text='188', font=("Arial 16"), bg='white', fg='black')
 poke_total.place(x=190, y=600)
 
 
@@ -89,7 +89,8 @@ listPokemons = [Bulbizarre, Herbizarre, Florizarre]
 
 # Ajouter un pokemon saisie
 def ajouter_pokemon():
-    add_poke = listPokemons.append(Pokemon(saisie_pok_name.get(), 
+    add_poke = listPokemons.append(Pokemon(
+                                saisie_pok_name.get(), 
                                 saisie_pok_type.get(), 
                                 saisie_pok_number.get(), 
                                 saisie_pok_hp.get(), 
@@ -115,6 +116,10 @@ def choose_pokemon():
     poke_vit.config(text=listPokemons[index].vit)
     poke_total.config(text=listPokemons[index].total)
 
+# Calcul du total des stats
+def pokeSomme():
+    total = int(poke_hp) + int(poke_attack) + int(poke_defense) + int(poke_vit)
+    pokeSomme(text=total)
 
 # Déclaration de ma Listbox sur rigth_frame
 listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN)
@@ -162,16 +167,12 @@ l_add_pok_vitesse = Label(rigth_frame, text="Vitesse", font=("Arial", 12), bg='w
 saisie_pok_vit = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN)
 saisie_pok_vit.place(x=210, y=530)
 
-l_add_pok_total = Label(rigth_frame, text="Total", font=("Arial", 12), bg='white').place(x=220, y=560)
-saisie_pok_total = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN)
-saisie_pok_total.place(x=210, y=590)
-
 # Création d'un bouton pour ajouter un pokemon à la liste
 btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-btn_add_poke.place(x=10, y=600)
+btn_add_poke.place(x=210, y=600)
 
 # Création d'un bouton pour sélectionner un pokemon dans la liste
 bts_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-bts_select_pok.place(x=10, y=20)
+bts_select_pok.place(x=10, y=600)
 
 fenetre.mainloop()

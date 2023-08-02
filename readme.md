@@ -29,6 +29,8 @@
 * Liste 3 pokemons de base
 * Affiche leurs informations (nom, type, numéro, statistiques et deux compétences) lorsqu'il est sélectionné
 * Possibilité d'ajouter un Pokemon manuellement grâce à des Entry et un bouton de validation.
+* Le total des statistiques se calcul automatiquement
+
 
 ## Auteure
 
