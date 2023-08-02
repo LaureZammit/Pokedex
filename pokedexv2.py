@@ -38,9 +38,9 @@ poke_number = Label(left_frame, text="#001", font=("Arial 16"), bg='grey', fg='w
 poke_number.place(x=190, y=300)
 poke_type = Label(left_frame, text="Plante / Poison", font=("Arial 16"), bg='white', fg='black')
 poke_type.place(x=190, y=330)
-poke_comp1 = Label(left_frame, text="Fouet Lianes", font=("Arial 16"), bg='white', fg='black')
+poke_comp1 = Label(left_frame, text="Vampigraine", font=("Arial 16"), bg='white', fg='black')
 poke_comp1.place(x=190, y=360)
-poke_comp2 = Label(left_frame, text="Vampigraine", font=("Arial 16"), bg='white', fg='black')
+poke_comp2 = Label(left_frame, text="Fouet Lianes", font=("Arial 16"), bg='white', fg='black')
 poke_comp2.place(x=190, y=390)
 poke_hp = Label(left_frame, text='45', font=("Arial 16"),bg='white', fg='black')
 poke_hp.place(x=190, y=450)
@@ -53,9 +53,17 @@ poke_vit.place(x=190, y=540)
 poke_total = Label(left_frame, text='188', font=("Arial 16"), bg='white', fg='black')
 poke_total.place(x=190, y=600)
 
+# Chargement d'une image
+image = Image.open("img/pokeball.jpg")
+image = image.resize((210, 210))
+poke_img = ImageTk.PhotoImage(image)
+
+l_img = Label(left_frame, image=poke_img)
+l_img.place(x=10, y=70)
+
 
 class Pokemon():
-    def __init__(self, name, type, number, hp, attack, defense, vit, competence1, competence2):
+    def __init__(self, name, type, number, hp, attack, defense, vit, competence1, competence2, image):
         self.name = name
         self.type = type
         self.number = number
@@ -66,24 +74,28 @@ class Pokemon():
         self.total = int(self.hp) + int(self.attack) + int(self.defense) + int(self.vit)
         self.competence1 = competence1
         self.competence2 = competence2
+        self.image = image
 
 Bulbizarre = Pokemon("Bulbizarre", 
                      "Plante / Poison", 
                      '#001', 
                      '45', '49', '49', '45', 
-                     'Vampigraine', 'Fouet Lianes')
+                     'Vampigraine', 'Fouet Lianes',
+                     "img/001bulbizarre.png")
 
 Herbizarre = Pokemon("Herbizarre", 
                      "Plante / Poison", 
                      '#002', 
                      '60', '62', '63', '60', 
-                     'Danse Fleur', 'Tempête Florale')
+                     'Danse Fleur', 'Tempête Florale',
+                     "img/002herbizarre.png")
 
 Florizarre = Pokemon("Florizarre", 
                      "Plante / Poison", 
                      '#003', 
                      '80', '82', '83', '80', 
-                     'Tranch\'Herbe', 'Poudre Dodo')
+                     'Tranch\'Herbe', 'Poudre Dodo',
+                     "img/003florizarre.png")
 
 listPokemons = [Bulbizarre, Herbizarre, Florizarre]
 
@@ -98,7 +110,8 @@ def ajouter_pokemon():
                                 saisie_pok_defense.get(), 
                                 saisie_pok_vit.get(), 
                                 saisie_pok_comp1.get(), 
-                                saisie_pok_comp2.get()
+                                saisie_pok_comp2.get(),
+                                saisie_pok_img.get()
                                 ))
     add_pokename = listbox.insert(END, saisie_pok_name.get())
 
@@ -115,6 +128,17 @@ def choose_pokemon():
     poke_defense.config(text=listPokemons[index].defense)
     poke_vit.config(text=listPokemons[index].vit)
     poke_total.config(text=listPokemons[index].total)
+
+    # poke_img.delete(image)
+
+    image = Image.open(listPokemons[index].image)
+    image = image.resize((210, 210))
+    poke_img = ImageTk.PhotoImage(image)
+
+    l_img = Label(left_frame, image=poke_img)
+    l_img.place(x=10, y=70)
+
+
 
 # Calcul du total des stats
 def pokeSomme():
@@ -167,12 +191,16 @@ l_add_pok_vitesse = Label(rigth_frame, text="Vitesse", font=("Arial", 12), bg='w
 saisie_pok_vit = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN)
 saisie_pok_vit.place(x=210, y=530)
 
+l_add_pok_img = Label(rigth_frame, text="Image", font=("Arial", 12), bg='white').place(x=220, y=560)
+saisie_pok_img = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUNKEN)
+saisie_pok_img.place(x=210, y=590)
+
 # Création d'un bouton pour ajouter un pokemon à la liste
 btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-btn_add_poke.place(x=210, y=600)
+btn_add_poke.place(x=210, y=610)
 
 # Création d'un bouton pour sélectionner un pokemon dans la liste
 bts_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-bts_select_pok.place(x=10, y=600)
+bts_select_pok.place(x=10, y=560)
 
 fenetre.mainloop()
