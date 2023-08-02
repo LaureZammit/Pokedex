@@ -14,8 +14,8 @@ pokemon =   {"Bulbizarre":{ "status":['45', '49', '49', '45', '237'],
                             "type": ['#002', 'Plante / Poison'],
                             "autres": ['img/002_herbizarre.avif', 'green']
                             },
-            "Florizarre":{ "status":['60', '62', '63', '60', '245'], 
-                            "attaques": ['Danse Fleur', 'Tempête florale'],
+            "Florizarre":{ "status":['80', '82', '83', '80', '325'], 
+                            "attaques": ['Tranch\'Herbe', 'Poudre Dodo'],
                             "type": ['#003', 'Plante / Poison'],
                             "autres": ['img/003_florizarre.avif', 'green']
                             },

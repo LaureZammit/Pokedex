@@ -13,10 +13,13 @@ fenetre.config(bg='red')
 
 ttk.Separator(fenetre, orient=VERTICAL).grid(row=0, columnspan=1, ipadx=272)
 
-# Fonctions
+# Functions
+# Récupérer le pokemon saisie
 def ajouter_pokemon(i):
+    i = saisie_pok_name.get()
     listbox.config(END, saisie_pok_name.get())
 
+# Choisir le pokemon à afficher
 def choose_pokemon (i):
     left_frame['bg'] = pokemon[i]['autres'][1]
 
@@ -36,24 +39,16 @@ def choose_pokemon (i):
     img_base = Label(left_frame, image=pok_image, bg=pokemon[i]['Others'][1])
     img_base.place(x=70, y=70)
 
-    # if i == 'Bulbizarre':
-    #     pok_name['fg'] = 'green'
-    # else:
-    #     pok_name['fg'] = 'blue'
+    # loading status
+    poke_hp['text'] = pokemon[i]['status'][0]
+    poke_attack['text'] = pokemon[i]['status'][1]
+    poke_defense['text'] = pokemon[i]['status'][2]
+    poke_vit['text'] = pokemon[i]['status'][3]
+    poke_total['text'] = pokemon[i]['status'][4]
 
-    # # loading status
-    # poke_hp['text'] = pokemon[i]['status'][0]
-    # poke_attack['text'] = pokemon[i]['status'][1]
-    # poke_defense['text'] = pokemon[i]['status'][2]
-    # poke_vit['text'] = pokemon[i]['status'][3]
-    # poke_total['text'] = pokemon[i]['status'][4]
-
-    # # loading skills
-    # poke_comp1['text'] = pokemon[i]['attaques'][0]
-    # poke_comp2['text'] = pokemon[i]['attaques'][1]
-
-    # poke_type.lift()
-    # poke_number.lift()
+    # loading skills
+    poke_comp1['text'] = pokemon[i]['attaques'][0]
+    poke_comp2['text'] = pokemon[i]['attaques'][1]
     
 
 
@@ -90,14 +85,14 @@ poke_total = Label(left_frame, text='237', font=("Arial 16"), bg='white', fg='bl
 
 
 # Déclaration de ma Listbox sur rigth_frame
-listbox = Listbox(rigth_frame, width=20, height=30, font=("Arial", 12), bg='white', relief=SUNKEN)
+listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN)
 
 # Ajout d'éléments à ma listbox
 listbox.insert(END, "Bulbizarre")
 listbox.insert(END, "Herbizarre")
 listbox.insert(END, "Florizarre")
 
-listbox.place(x=10, y=10)
+listbox.place(x=10, y=80)
 
 # Label pour ajouter un pokemon à la liste
 l_add_pok_name = Label(rigth_frame, text="Ajouter un pokemon\nAjouter son nom", font=("Arial", 12), bg='white').place(x=220, y=20)
@@ -132,5 +127,8 @@ saisie_pok_total = Entry(rigth_frame, font=("Arial", 12), bg='white', relief=SUN
 
 # Création d'un bouton pour ajouter un pokemon à la liste
 btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_pokemon, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=30, y=600)
+
+# Création d'un bouton pour sélectionner un pokemon dans la liste
+bts_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=SUNKEN).place(x=10, y=20)
 
 fenetre.mainloop()
