@@ -140,8 +140,10 @@ def ajouter_pokemon():
 def save_data():
     with open('data.pickle', 'wb') as file:
         pickle.dump(listPokemons, file)
+    with open('data.pickle', 'rb') as file:
+        loaded_data = pickle.load(file)
 
-# # Charger les données à partir d'un fichier
+# Charger les données à partir d'un fichier
 # with open('data.pickle', 'rb') as file:
 #     loaded_data = pickle.load(file)
 
@@ -171,21 +173,21 @@ def choose_pokemon():
 # def tri_pokemon():
 #     sorted(listPokemons, key=lambda Pokemon: Pokemon.number)
 
-# def change_pokemon():
+# def delete_pokemon():
 #     index = listbox.curselection()[0]
-#     change_poke = listPokemons.append(Pokemon(
-#                                 saisie_pok_name.get(), 
-#                                 saisie_pok_type.get(), 
-#                                 saisie_pok_number.get(), 
-#                                 saisie_pok_hp.get(), 
-#                                 saisie_pok_attack.get(), 
-#                                 saisie_pok_defense.get(), 
-#                                 saisie_pok_vit.get(), 
-#                                 saisie_pok_comp1.get(), 
-#                                 saisie_pok_comp2.get(),
-#                                 saisie_pok_img.get()
+#     delete_poke = listPokemons(Pokemon(
+#                                 poke_name.delete(), 
+#                                 poke_type.delete(), 
+#                                 poke_number.delete(), 
+#                                 poke_hp.delete(), 
+#                                 poke_attack.delete(), 
+#                                 poke_defense.delete(), 
+#                                 poke_vit.delete(), 
+#                                 poke_comp1.delete(), 
+#                                 poke_comp2.delete(),
+#                                 poke_img.delete()
 #                                 ))
-#     change_pokename = listbox.insert(index, saisie_pok_name.get())
+#     delete_pokename = listbox.curselection(index, poke_name.delete())
 
 #     saisie_pok_name.delete(0, END), 
 #     saisie_pok_type.delete(0, END), 
@@ -204,7 +206,7 @@ def pokeSomme():
     pokeSomme(text=total)
 
 # Déclaration de ma Listbox sur rigth_frame
-listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN)
+listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN, highlightcolor='red')
 
 # Ajout d'éléments à ma listbox
 listbox.insert(END, "Bulbizarre")
@@ -212,7 +214,7 @@ listbox.insert(END, "Herbizarre")
 listbox.insert(END, "Florizarre")
 listbox.insert(END, "Dracaufeu")
 
-listbox.place(x=10, y=80)
+listbox.place(x=10, y=10)
 
 # Label pour ajouter un pokemon à la liste
 l_add_pok_name = Label(rigth_frame, text="Ajouter un pokemon\nAjouter son nom", font=("Arial", 12), bg='white').place(x=220, y=20)
@@ -260,11 +262,11 @@ btn_add_poke.place(x=210, y=615)
 
 # Création d'un bouton pour sélectionner un pokemon dans la liste
 btn_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-btn_select_pok.place(x=10, y=570)
+btn_select_pok.place(x=10, y=495)
 
-# #  Créationn d'un bouton pour modifer les données d'un pokemon dans la liste
-# btn_change_pok = Button(rigth_frame, text="Modifier", command=change_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
-# btn_change_pok.place(x=10, y=610)
+# #  Créationn d'un bouton pour supprimer les données d'un pokemon dans la liste
+# btn_delete_pok = Button(rigth_frame, text="Supprimer", command=delete_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
+# btn_delete_pok.place(x=10, y=530)
 
 # Création d'un bouton pour trier les pokemons
 # btn_tri_poke = Button(rigth_frame, text="Trier", command=tri_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
