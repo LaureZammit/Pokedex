@@ -1,8 +1,10 @@
 from tkinter import *
 from random import randint
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk  # Updated import statement for Pillow
 import pickle
+from tkinter import messagebox
+
 
 
 fenetre = Tk()
@@ -13,6 +15,29 @@ fenetre.resizable(False, False)
 fenetre.config(bg='red')
 
 ttk.Separator(fenetre, orient=VERTICAL).grid(row=0, columnspan=1, ipadx=272)
+
+# Function to save the data
+def save_data():
+    try:
+        with open('data.pickle', 'wb') as file:
+            pickle.dump(listPokemons, file)
+        messagebox.showinfo("Sauvegarde", "Données sauvegardées avec succès!")
+    except Exception as e:
+        messagebox.showerror("Erreur", f"Une erreur s'est produite lors de la sauvegarde:\n{e}")
+
+    # Sauvegarder les données dans un fichier
+# def save_data():
+#     with open('data.pickle', 'wb') as file:
+#         pickle.dump(listPokemons, file)
+#     with open('data.pickle', 'rb') as file:
+#         loaded_data = pickle.load(file)
+
+# # Charger les données à partir d'un fichier
+# # with open('data.pickle', 'rb') as file:
+# #     loaded_data = pickle.load(file)
+
+
+
 
 
 # Déclaration de la taille de mes fenêtres
@@ -106,7 +131,21 @@ Dracaufeu = Pokemon("Dracaufeu",
                     'Flammèche', 'Lance-Flammes',
                     "img/006dracaufeu.png")
 
-listPokemons = [Bulbizarre, Herbizarre, Florizarre, Dracaufeu]
+listPokemons = []
+
+# Function to load the data
+def load_data():
+    try:
+        with open('data.pickle', 'rb') as file:
+            loaded_data = pickle.load(file)
+            listPokemons.extend(loaded_data)
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        messagebox.showerror("Erreur", f"Une erreur s'est produite lors du chargement des données:\n{e}")
+
+# Call load_data() at the beginning to load the data
+load_data()
 
 
 # Ajouter un pokemon saisie
@@ -135,18 +174,6 @@ def ajouter_pokemon():
     saisie_pok_comp1.delete(0, END), 
     saisie_pok_comp2.delete(0, END),
     saisie_pok_img.delete(0, END)
-
-    # Sauvegarder les données dans un fichier
-def save_data():
-    with open('data.pickle', 'wb') as file:
-        pickle.dump(listPokemons, file)
-    with open('data.pickle', 'rb') as file:
-        loaded_data = pickle.load(file)
-
-# Charger les données à partir d'un fichier
-# with open('data.pickle', 'rb') as file:
-#     loaded_data = pickle.load(file)
-
 
 # Choisir le pokemon à afficher
 def choose_pokemon():
@@ -208,11 +235,15 @@ def pokeSomme():
 # Déclaration de ma Listbox sur rigth_frame
 listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN, highlightcolor='red')
 
-# Ajout d'éléments à ma listbox
-listbox.insert(END, "Bulbizarre")
-listbox.insert(END, "Herbizarre")
-listbox.insert(END, "Florizarre")
-listbox.insert(END, "Dracaufeu")
+# # Ajout d'éléments à ma listbox
+# listbox.insert(END, "Bulbizarre")
+# listbox.insert(END, "Herbizarre")
+# listbox.insert(END, "Florizarre")
+# listbox.insert(END, "Dracaufeu")
+
+# Insert les pokemon depuis la liste
+for pokemon in listPokemons:
+    listbox.insert(END, pokemon.name)
 
 listbox.place(x=10, y=10)
 
