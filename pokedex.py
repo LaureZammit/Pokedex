@@ -1,6 +1,8 @@
 from tkinter import *
+from random import randint
 from tkinter import ttk
 from PIL import Image, ImageTk
+import pickle
 
 
 fenetre = Tk()
@@ -34,7 +36,7 @@ pok_total = Label(left_frame, text="Total", font=("Arial", 16), bg='white').plac
 # Déclaration des variables
 poke_name = Label(left_frame, text="Bulbizarre", font=("Arial 28"), bg='white', fg='black')
 poke_name.place(x=150, y=14)
-poke_number = Label(left_frame, text="#001", font=("Arial 16"), bg='grey', fg='white')
+poke_number = Label(left_frame, text= "001", font=("Arial 16"), bg='grey', fg='white')
 poke_number.place(x=190, y=300)
 poke_type = Label(left_frame, text="Plante / Poison", font=("Arial 16"), bg='white', fg='black')
 poke_type.place(x=190, y=330)
@@ -78,26 +80,34 @@ class Pokemon():
 
 Bulbizarre = Pokemon("Bulbizarre", 
                      "Plante / Poison", 
-                     '#001', 
+                     '001', 
                      '45', '49', '49', '45', 
                      'Vampigraine', 'Fouet Lianes',
                      "img/001bulbizarre.png")
 
 Herbizarre = Pokemon("Herbizarre", 
                      "Plante / Poison", 
-                     '#002', 
+                     '002', 
                      '60', '62', '63', '60', 
                      'Danse Fleur', 'Tempête Florale',
                      "img/002herbizarre.png")
 
 Florizarre = Pokemon("Florizarre", 
                      "Plante / Poison", 
-                     '#003', 
+                     '003', 
                      '80', '82', '83', '80', 
                      'Tranch\'Herbe', 'Poudre Dodo',
                      "img/003florizarre.png")
 
-listPokemons = [Bulbizarre, Herbizarre, Florizarre]
+Dracaufeu = Pokemon("Dracaufeu", 
+                    "Feu",
+                    '006',
+                    '78', '84', '78', '100',
+                    'Flammèche', 'Lance-Flammes',
+                    "img/006dracaufeu.png")
+
+listPokemons = [Bulbizarre, Herbizarre, Florizarre, Dracaufeu]
+
 
 # Ajouter un pokemon saisie
 def ajouter_pokemon():
@@ -126,6 +136,16 @@ def ajouter_pokemon():
     saisie_pok_comp2.delete(0, END),
     saisie_pok_img.delete(0, END)
 
+    # Sauvegarder les données dans un fichier
+def save_data():
+    with open('data.pickle', 'wb') as file:
+        pickle.dump(listPokemons, file)
+
+# # Charger les données à partir d'un fichier
+# with open('data.pickle', 'rb') as file:
+#     loaded_data = pickle.load(file)
+
+
 # Choisir le pokemon à afficher
 def choose_pokemon():
     index = listbox.curselection()[0]
@@ -145,20 +165,38 @@ def choose_pokemon():
     poke_img = ImageTk.PhotoImage(image)
 
     l_img.config(image=poke_img)
+    l_img.image = poke_img
     l_img.place(x=10, y=70)
 
-    if poke_type(text=listPokemons[index].type) == "Plante / Poison":
-        left_frame.config(bg='#28fc03')
-    elif poke_type(text=listPokemons[index].type) == "Insecte":
-        left_frame.config(bg='#baf779')
-    elif poke_type(text=listPokemons[index].type) == "Eau":
-        left_frame.config(bg='#8cc5f5')
-    elif poke_type(text=listPokemons[index].type) == "Feu":
-        left_frame.config(bg='#ed151d')
-    else:
-        left_frame(bg='#ebdeab')
+# def tri_pokemon():
+#     sorted(listPokemons, key=lambda Pokemon: Pokemon.number)
 
+# def change_pokemon():
+#     index = listbox.curselection()[0]
+#     change_poke = listPokemons.append(Pokemon(
+#                                 saisie_pok_name.get(), 
+#                                 saisie_pok_type.get(), 
+#                                 saisie_pok_number.get(), 
+#                                 saisie_pok_hp.get(), 
+#                                 saisie_pok_attack.get(), 
+#                                 saisie_pok_defense.get(), 
+#                                 saisie_pok_vit.get(), 
+#                                 saisie_pok_comp1.get(), 
+#                                 saisie_pok_comp2.get(),
+#                                 saisie_pok_img.get()
+#                                 ))
+#     change_pokename = listbox.insert(index, saisie_pok_name.get())
 
+#     saisie_pok_name.delete(0, END), 
+#     saisie_pok_type.delete(0, END), 
+#     saisie_pok_number.delete(0, END), 
+#     saisie_pok_hp.delete(0, END), 
+#     saisie_pok_attack.delete(0, END), 
+#     saisie_pok_defense.delete(0, END), 
+#     saisie_pok_vit.delete(0, END), 
+#     saisie_pok_comp1.delete(0, END), 
+#     saisie_pok_comp2.delete(0, END),
+#     saisie_pok_img.delete(0, END)
 
 # Calcul du total des stats
 def pokeSomme():
@@ -172,6 +210,7 @@ listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='whit
 listbox.insert(END, "Bulbizarre")
 listbox.insert(END, "Herbizarre")
 listbox.insert(END, "Florizarre")
+listbox.insert(END, "Dracaufeu")
 
 listbox.place(x=10, y=80)
 
@@ -217,10 +256,22 @@ saisie_pok_img.place(x=210, y=590)
 
 # Création d'un bouton pour ajouter un pokemon à la liste
 btn_add_poke = Button(rigth_frame, text="Ajouter le Pokemon", command=ajouter_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-btn_add_poke.place(x=210, y=610)
+btn_add_poke.place(x=210, y=615)
 
 # Création d'un bouton pour sélectionner un pokemon dans la liste
 btn_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
-btn_select_pok.place(x=10, y=560)
+btn_select_pok.place(x=10, y=570)
+
+# #  Créationn d'un bouton pour modifer les données d'un pokemon dans la liste
+# btn_change_pok = Button(rigth_frame, text="Modifier", command=change_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
+# btn_change_pok.place(x=10, y=610)
+
+# Création d'un bouton pour trier les pokemons
+# btn_tri_poke = Button(rigth_frame, text="Trier", command=tri_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
+# btn_tri_poke.place(x=10, y=610)
+                      
+# Création d'un bouton d'enregistrement
+btn_save = Button(rigth_frame, text="Enregistrer", command=save_data, font=('Arial', 12), bg='white', relief=RAISED)
+btn_save.place(x=10, y=610)
 
 fenetre.mainloop()
