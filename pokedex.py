@@ -16,6 +16,7 @@ fenetre.config(bg='red')
 
 ttk.Separator(fenetre, orient=VERTICAL).grid(row=0, columnspan=1, ipadx=272)
 
+
 # Function to save the data
 def save_data():
     try:
@@ -25,20 +26,6 @@ def save_data():
     except Exception as e:
         messagebox.showerror("Erreur", f"Une erreur s'est produite lors de la sauvegarde:\n{e}")
 
-    # Sauvegarder les données dans un fichier
-# def save_data():
-#     with open('data.pickle', 'wb') as file:
-#         pickle.dump(listPokemons, file)
-#     with open('data.pickle', 'rb') as file:
-#         loaded_data = pickle.load(file)
-
-# # Charger les données à partir d'un fichier
-# # with open('data.pickle', 'rb') as file:
-# #     loaded_data = pickle.load(file)
-
-
-
-
 
 # Déclaration de la taille de mes fenêtres
 left_frame = Frame(fenetre, width=450, height=650, bg='white')
@@ -46,6 +33,10 @@ left_frame.grid(row=0, column=0, padx=1, pady=1)
 
 rigth_frame = Frame(fenetre, width=400, height=650, bg='white')
 rigth_frame.grid(row=0, column=1, padx=1, pady=1)
+
+# # Ajout d'une couleur de fond aléatoire sur left_frame
+# color = randint(0, 255)
+# left_frame.config(bg=f"#{color:02x}{color:02x}{color:02x}")
 
 # Déclaration de mes Label sur left_frame
 pok_name = Label(left_frame, text="Nom", font=("Arial 30"), bg='white').place(x=10, y=10)
@@ -85,10 +76,17 @@ image = Image.open("img/pokeball.jpg")
 image = image.resize((210, 210))
 poke_img = ImageTk.PhotoImage(image)
 
-l_img = Label(left_frame, image=poke_img)
+l_img = Label(left_frame, image=poke_img, bg='white')
 l_img.place(x=10, y=70)
 
+# Fonction qui change la couleur de fond de l'image l_img en fonction du type du Pokemon
+def change_color(type):
+    color = randint(0, 255)
+    color1 = randint(0, 255)
+    color2 = randint(0, 255)
+    l_img.config(bg=f"#{color:02x}{color1:02x}{color2:02x}")
 
+# Déclaration de ma class Pokemon
 class Pokemon():
     def __init__(self, name, type, number, hp, attack, defense, vit, competence1, competence2, image):
         self.name = name
@@ -197,8 +195,7 @@ def choose_pokemon():
     l_img.image = poke_img
     l_img.place(x=10, y=70)
 
-# def tri_pokemon():
-#     sorted(listPokemons, key=lambda Pokemon: Pokemon.number)
+    change_color(type)
 
 # Fonction pour supprimer les données d'un pokemon et son nom dans la listbox
 def supprimer_pokemon():
@@ -213,12 +210,6 @@ def pokeSomme():
 
 # Déclaration de ma Listbox sur rigth_frame
 listbox = Listbox(rigth_frame, width=20, height=25, font=("Arial", 12), bg='white', relief=SUNKEN, highlightcolor='red')
-
-# # Ajout d'éléments à ma listbox
-# listbox.insert(END, "Bulbizarre")
-# listbox.insert(END, "Herbizarre")
-# listbox.insert(END, "Florizarre")
-# listbox.insert(END, "Dracaufeu")
 
 # Insert les pokemon depuis la liste
 for pokemon in listPokemons:
