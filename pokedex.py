@@ -200,32 +200,11 @@ def choose_pokemon():
 # def tri_pokemon():
 #     sorted(listPokemons, key=lambda Pokemon: Pokemon.number)
 
-# def delete_pokemon():
-#     index = listbox.curselection()[0]
-#     delete_poke = listPokemons(Pokemon(
-#                                 poke_name.delete(), 
-#                                 poke_type.delete(), 
-#                                 poke_number.delete(), 
-#                                 poke_hp.delete(), 
-#                                 poke_attack.delete(), 
-#                                 poke_defense.delete(), 
-#                                 poke_vit.delete(), 
-#                                 poke_comp1.delete(), 
-#                                 poke_comp2.delete(),
-#                                 poke_img.delete()
-#                                 ))
-#     delete_pokename = listbox.curselection(index, poke_name.delete())
-
-#     saisie_pok_name.delete(0, END), 
-#     saisie_pok_type.delete(0, END), 
-#     saisie_pok_number.delete(0, END), 
-#     saisie_pok_hp.delete(0, END), 
-#     saisie_pok_attack.delete(0, END), 
-#     saisie_pok_defense.delete(0, END), 
-#     saisie_pok_vit.delete(0, END), 
-#     saisie_pok_comp1.delete(0, END), 
-#     saisie_pok_comp2.delete(0, END),
-#     saisie_pok_img.delete(0, END)
+# Fonction pour supprimer les données d'un pokemon et son nom dans la listbox
+def supprimer_pokemon():
+    index = listbox.curselection()[0]
+    listPokemons.pop(index)
+    listbox.delete(index)
 
 # Calcul du total des stats
 def pokeSomme():
@@ -295,9 +274,9 @@ btn_add_poke.place(x=210, y=615)
 btn_select_pok = Button(rigth_frame, text="Sélectionner", command=choose_pokemon, font=("Arial", 12), bg='white', relief=RAISED)
 btn_select_pok.place(x=10, y=495)
 
-# #  Créationn d'un bouton pour supprimer les données d'un pokemon dans la liste
-# btn_delete_pok = Button(rigth_frame, text="Supprimer", command=delete_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
-# btn_delete_pok.place(x=10, y=530)
+#  Créationn d'un bouton pour supprimer les données d'un pokemon dans la liste
+btn_delete_pok = Button(rigth_frame, text="Supprimer", command=supprimer_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
+btn_delete_pok.place(x=10, y=530)
 
 # Création d'un bouton pour trier les pokemons
 # btn_tri_poke = Button(rigth_frame, text="Trier", command=tri_pokemon, font=('Arial', 12), bg='white', relief=RAISED)
