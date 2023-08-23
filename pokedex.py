@@ -101,33 +101,33 @@ class Pokemon():
         self.competence2 = competence2
         self.image = image
 
-Bulbizarre = Pokemon("Bulbizarre", 
-                     "Plante / Poison", 
-                     '001', 
-                     '45', '49', '49', '45', 
-                     'Vampigraine', 'Fouet Lianes',
-                     "img/001bulbizarre.png")
+# Bulbizarre = Pokemon("Bulbizarre", 
+#                      "Plante / Poison", 
+#                      '001', 
+#                      '45', '49', '49', '45', 
+#                      'Vampigraine', 'Fouet Lianes',
+#                      "img/001bulbizarre.png")
 
-Herbizarre = Pokemon("Herbizarre", 
-                     "Plante / Poison", 
-                     '002', 
-                     '60', '62', '63', '60', 
-                     'Danse Fleur', 'Tempête Florale',
-                     "img/002herbizarre.png")
+# Herbizarre = Pokemon("Herbizarre", 
+#                      "Plante / Poison", 
+#                      '002', 
+#                      '60', '62', '63', '60', 
+#                      'Danse Fleur', 'Tempête Florale',
+#                      "img/002herbizarre.png")
 
-Florizarre = Pokemon("Florizarre", 
-                     "Plante / Poison", 
-                     '003', 
-                     '80', '82', '83', '80', 
-                     'Tranch\'Herbe', 'Poudre Dodo',
-                     "img/003florizarre.png")
+# Florizarre = Pokemon("Florizarre", 
+#                      "Plante / Poison", 
+#                      '003', 
+#                      '80', '82', '83', '80', 
+#                      'Tranch\'Herbe', 'Poudre Dodo',
+#                      "img/003florizarre.png")
 
-Dracaufeu = Pokemon("Dracaufeu", 
-                    "Feu",
-                    '006',
-                    '78', '84', '78', '100',
-                    'Flammèche', 'Lance-Flammes',
-                    "img/006dracaufeu.png")
+# Dracaufeu = Pokemon("Dracaufeu", 
+#                     "Feu",
+#                     '006',
+#                     '78', '84', '78', '100',
+#                     'Flammèche', 'Lance-Flammes',
+#                     "img/006dracaufeu.png")
 
 listPokemons = []
 
