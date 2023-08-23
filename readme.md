@@ -42,9 +42,7 @@
 ## Construction
 
 ### Logiciels
-* [![HTML][Html]][Html-url]
-* [![CSS][Css]][Css-url]
-* [![VSCode][Vscode]][Vscode-url]
+* Python
 
 ### Interface
 * Tkinter (Tk interface) :
